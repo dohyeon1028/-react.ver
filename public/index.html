@@ -6,7 +6,35 @@
   <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>React App</title>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3180857568184579a8145861c8f2822d"></script>
+  <script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	8c713cb4117fe6b0ff4cded996b2fa35"></script>
+  <style>
+    .defaults {
+      position: absolute;
+      top: -999999px;
+    }
+
+    .mask {
+      width: 100%;
+      height: 100vh;
+      background: #111;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 5;
+      opacity: 1;
+      transition: opacity 2s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font: 20px/1 'arial';
+      color: #fff;
+    }
+
+    .mask.off {
+      opacity: 0;
+    }
+  </style>
 </head>
 
 <body>
@@ -88,4 +116,7 @@
   비디오 구현 방법1. 웹 서버에 업로드하고(구글드라이버 등) url을 받아서 src에 url을 첨부
   비디오 구현 방법2. 강제로 비디오와 큰 이미지들을 먼저 캐싱하도록 index.html에 DOM 요소로 넣는 방법
 
+  정리.
+  강제로 이미지와 비디오를 캐싱하는 방법은 index.html에 DOM을 만들고(Default) 해당 DOM에 캐싱할 이미지와 비디오를 innerHTML로 넣어버림. 리얼 DOM으로 이미지와 비디오가 캐싱중에는 마스크를 씌워서 로딩 중임을 사용자에게 알리고 해당 로딩함수(loadImg, loadVid)를 통해서 로딩이 완료되는 시점을 찾는다. 로딩이 완료되면 마스크를 오퍼시티 0을 주며 안보이게하고 이후에 index.html에 DOM
+  (default)로 만든 디폴트와 마스크를 완전히 remove함. 이렇게되면 이미지와 비디오의 소스는 캐싱된 상태에서 보이지만 않게되므로 좀 더 쾌적하게 이미지와 비디오를 로드하여 구현할 수 있다.
  -->
