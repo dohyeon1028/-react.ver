@@ -1,0 +1,47 @@
+.Gallery {
+	.inner {
+		.frame {
+			transform: translateY(200px);
+			opacity: 0;
+			transition: transform 2s 0.5s, opacity 2s 0.5s;
+			&.on {
+				transform: translateY(0px);
+				opacity: 1;
+			}
+			&::after {
+				clear: both;
+				content: '';
+				display: block;
+			}
+			article {
+				width: 25%;
+				padding: 10px;
+				cursor: pointer;
+				transition: 0.5s;
+				float: left;
+				box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+				.inner {
+					width: 100%;
+					padding: 10px;
+					background-color: #fff;
+					.pic {
+						width: 100%;
+						margin-bottom: 5px;
+						img {
+							width: 100%;
+						}
+					}
+					h2 {
+						padding: 0px 10px;
+						font: normal 18px/1 'arial';
+						color: #777;
+						margin-bottom: 20px;
+					}
+				}
+				&:hover {
+					box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+				}
+			}
+		}
+	}
+}

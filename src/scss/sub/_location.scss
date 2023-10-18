@@ -1,0 +1,34 @@
+.Location {
+	#map {
+		width: 100%;
+		height: 500px;
+		background-color: #000;
+		margin-bottom: 10px;
+	}
+	button {
+		width: 20%;
+		height: 50px;
+		float: left;
+	}
+	.branch {
+		width: 100%;
+		height: 50px;
+		li {
+			width: 20%;
+			height: 100%;
+			float: right;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-left: 5px;
+			border: 1px solid #000;
+			background-color: #fff;
+			color: #000;
+			&.on {
+				border: 1px solid #fff;
+				background-color: #000;
+				color: #fff;
+			}
+		}
+	}
+}
