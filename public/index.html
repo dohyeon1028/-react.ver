@@ -13,6 +13,72 @@
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
   <div class="defaults">검색봇이 SEO를 위해서 읽도록 하는 텍스트 데이터를 작성하는 곳</div>
+  <div class="mask">로딩중... 혹은 이미지 등으로 로딩을 표현하는 곳</div>
+
+  <script>
+    const defaults = document.querySelector(".defaults");
+    const mask = document.querySelector(".mask");
+    let tags = "";
+    const baseURL = "https://dohyeon1028.github.io/react.start";
+    const imgs = [
+      baseURL + "/img/Community.jpg",
+      baseURL + "/img/Department.jpg",
+      baseURL + "/img/Gallery.jpg",
+      baseURL + "/img/Location.jpg",
+      baseURL + "/img/Youtube.jpg",
+      baseURL + "/img/Members.jpg",
+    ];
+    const vids = [
+      baseURL + "/img/vid.mp4"
+    ];
+    createDOM();
+    function createDOM() {
+      imgs.forEach((el) => {
+        tags += `<img src=${el} />`;
+      })
+      vids.forEach((el) => {
+        tags += `<video src=${el}></video>`;
+      })
+    }
+    let lenImg = imgs.length;
+    let lenVid = vids.length;
+    function loadImg() {
+      return new Promise((res, rej) => {
+        let countImg = 0;
+        const imgDOM = defaults.querySelectorAll("img");
+        imgDOM.forEach(el => {
+          el.onload = () => {
+            countImg++;
+            if (countImg === lenImg) {
+              res(true);
+            }
+          }
+        });
+      })
+    }
+
+    function loadVid() {
+      return new Promise((res, rej) => {
+        let countVid = 0;
+        const vidDOM = defaults.querySelectorAll("video");
+        vidDOM.forEach(el => {
+          el.onload = () => {
+            countVid++;
+            if (countVid === letVid) {
+              res(true);
+            }
+          }
+        });
+      })
+    }
+    defaults.innerHTML = tags;
+
+    Promise.all([loadImg(), loadVid()]).then(result => {
+      console.log(result);
+      const [loadImg, loadVid] = result;
+    })
+  </script>
+
 </body>
 
 </html>
@@ -22,5 +88,4 @@
   비디오 구현 방법1. 웹 서버에 업로드하고(구글드라이버 등) url을 받아서 src에 url을 첨부
   비디오 구현 방법2. 강제로 비디오와 큰 이미지들을 먼저 캐싱하도록 index.html에 DOM 요소로 넣는 방법
 
-  https://dohyeon1028.github.io/-react.ver.git/
  -->
