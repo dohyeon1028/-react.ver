@@ -59,52 +59,79 @@
     const vids = [
       baseURL + "/img/vid.mp4"
     ];
+    const lenImg = imgs.length;
+    const lenVid = vids.length;
+
+
     createDOM();
+
+
+
+
+    Promise.all([loadImg(), loadVid()]).then(result => {
+      console.log(result); //[true, true]
+      const [loadedImg, loadedVid] = result;
+
+      //두함수의 반환값이 모두 true이면 (영상, 이미지가 모두 로딩완료되면)
+      if (loadedImg && loadedVid) {
+        console.log('mask-hide');
+        mask.classList.add('off');
+
+        setTimeout(() => {
+          mask.remove();
+          defaults.remove();
+        }, 2000)
+      }
+    })
+
+
+
+    //DOM생성함수
     function createDOM() {
-      imgs.forEach((el) => {
-        tags += `<img src=${el} />`;
+      imgs.forEach(src => {
+        tags += `<img src=${src} />`
       })
-      vids.forEach((el) => {
-        tags += `<video src=${el}></video>`;
+      vids.forEach(src => {
+        tags += `<video src=${src}></video>`
       })
+      defaults.innerHTML = tags;
     }
-    let lenImg = imgs.length;
-    let lenVid = vids.length;
+
+
     function loadImg() {
       return new Promise((res, rej) => {
         let countImg = 0;
-        const imgDOM = defaults.querySelectorAll("img");
-        imgDOM.forEach(el => {
-          el.onload = () => {
+        const imgDOM = defaults.querySelectorAll('img');
+
+        imgDOM.forEach(img => {
+          img.onload = () => {
             countImg++;
+            console.log('img loaded..', countImg);
             if (countImg === lenImg) {
               res(true);
             }
           }
-        });
+        })
       })
     }
-
+    //영상소스가 모두 로딩완료되면 프로미스 객체로 true반환 함수
     function loadVid() {
       return new Promise((res, rej) => {
         let countVid = 0;
-        const vidDOM = defaults.querySelectorAll("video");
-        vidDOM.forEach(el => {
-          el.onload = () => {
+        const vidDOM = defaults.querySelectorAll('video');
+
+        vidDOM.forEach(vid => {
+          vid.onloadeddata = () => {
             countVid++;
-            if (countVid === letVid) {
+            console.log('video loaded..', countVid);
+            if (countVid === lenVid) {
               res(true);
             }
           }
-        });
+        })
       })
     }
-    defaults.innerHTML = tags;
 
-    Promise.all([loadImg(), loadVid()]).then(result => {
-      console.log(result);
-      const [loadImg, loadVid] = result;
-    })
   </script>
 
 </body>
