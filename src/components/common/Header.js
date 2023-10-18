@@ -13,7 +13,7 @@ export default function Header({ type }) {
     const active = { color: "#000" };
     let logoURL = "";
     // (조건) ? 참인경우 : 거짓인경우;
-    type === "main" ? (logoURL = "./img/logo_w.png") : (logoURL = "./img/logo_b.png");
+    type === "main" ? (logoURL = "/img/logo_w.png") : (logoURL = "/img/logo_b.png");
     //메인일경우 어떤 url들어가고
     //서브일경우에는 어떤 url이 들어가는지를 
     //3항연산자로 사용해서 구분할예정
